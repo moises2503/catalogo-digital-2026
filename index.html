@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catálogo digital 2026 de productos de limpieza, jardinería, hogar, ferretería y más." />
+  <title>Y todo por no estudiar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#secciones">Secciones</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Productos para hogar, negocio y oficina</span>
+        <h1>Tu catálogo en la web</h1>
+        <p class="lead">«Y todo lo que hagáis, hacedlo de ánimo, como al Señor...» <strong>Colosenses 3:23</strong><br />¡Equipa tu hogar o negocio con productos prácticos y de calidad! Encuentra aquí lo que necesitas.</p>
+        <p class="slogan">Y todo por no estudiar</p>
+        <div class="hero-actions">
+          <a class="btn" href="#catalogo">Ver catálogo</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Vista de revista digital">
+        <div class="magazine-mini">
+          <div class="mini-page mini-left">
+            <span class="mini-kicker">EDICIÓN DIGITAL · 2026</span>
+            <strong>Todo para<br />tu hogar.</strong>
+            <span class="mini-caption">52 páginas para hogar, negocio y oficina.</span>
+          </div>
+          <div class="mini-page mini-right">
+            <img src="pages/page-01.jpg" alt="Portada del catálogo de productos de limpieza" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="secciones" class="categories">
+      <h2>Secciones del catálogo</h2>
+      <div class="chips">
+        <span>Mechudos y mopas</span>
+        <span>Escobas y cepillos</span>
+        <span>Jarciería y plásticos</span>
+        <span>Fibras, paños y franelas</span>
+        <span>Químicos y aromatizantes</span>
+        <span>Ferretería, hogar y usos generales</span>
+        <span>Material eléctrico e iluminación</span>
+      </div>
+    </section>
+
+    <section id="catalogo" class="viewer-section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Revista digital</span>
+          <h2>Explora las 52 páginas</h2>
+          <p class="helper-text">Vista doble en todas las pantallas. Haz clic a los lados para cambiar de página.</p>
+        </div>
+        <div class="viewer-actions">
+          <button class="btn-small secondary" id="fullscreenBtn" type="button">Pantalla completa</button>
+        </div>
+      </div>
+
+      <div class="controls-panel" aria-label="Controles del visor">
+        <button id="prevBtn" class="nav-btn" type="button" aria-label="Página anterior">&#10094; Anterior</button>
+
+        <div class="page-indicator">
+          <span id="pageLabel">Portada</span>
+          <div class="jump-box">
+            <label for="pageInput">Ir a página</label>
+            <input id="pageInput" type="number" min="1" max="52" value="1" />
+            <button id="goBtn" type="button">Ir</button>
+          </div>
+        </div>
+
+        <button id="nextBtn" class="nav-btn" type="button" aria-label="Página siguiente">Siguiente &#10095;</button>
+      </div>
+
+      <div class="magazine-shell">
+        <div class="magazine-view" id="viewer" tabindex="0" aria-label="Visor del catálogo">
+          <button class="click-zone click-left" id="clickPrev" aria-label="Regresar página"></button>
+          <div class="spread" id="spread"></div>
+          <button class="click-zone click-right" id="clickNext" aria-label="Avanzar página"></button>
+        </div>
+      </div>
+
+      <div class="quick-links">
+        <button type="button" class="quick-link active" data-page="1">Portada</button>
+        <button type="button" class="quick-link" data-page="2">Sección 1</button>
+        <button type="button" class="quick-link" data-page="8">Sección 2</button>
+        <button type="button" class="quick-link" data-page="20">Sección 3</button>
+        <button type="button" class="quick-link" data-page="27">Sección 4</button>
+        <button type="button" class="quick-link" data-page="32">Sección 5</button>
+        <button type="button" class="quick-link" data-page="36">Sección 7</button>
+        <button type="button" class="quick-link" data-page="46">Sección 6</button>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Productos de limpieza, jardinería, hogar, ferretería y material eléctrico.</p>
+    <p>Contacto e informes: <a href="tel:9181139130">9181139130 · Marcar</a> · <a href="sms:9181139130">Enviar mensaje</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
