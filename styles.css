@@ -886,6 +886,19 @@ nav a:not(.btn-small):hover { color: var(--green); }
     linear-gradient(145deg, #1c352b, #14271f);
 }
 
+.spread.single-page {
+  align-items: center;
+  justify-content: center;
+}
+
+.spread.single-page .page-card.single {
+  flex: 0 1 auto;
+  width: min(100%, 680px);
+  height: auto;
+  max-height: 68vh;
+  aspect-ratio: var(--page-aspect-ratio, 0.707);
+}
+
 .page-card { box-shadow: 0 24px 70px rgba(0, 0, 0, .3); }
 .page-card.single { border-radius: 10px; }
 .page-card.left { border-radius: 10px 0 0 10px; }
@@ -1023,6 +1036,7 @@ body.catalog-fullscreen-active {
   flex: 0 1 auto;
   width: min(100%, 60vh, 680px);
   height: auto;
+  max-height: 84vh;
   aspect-ratio: var(--page-aspect-ratio, 0.707);
 }
 

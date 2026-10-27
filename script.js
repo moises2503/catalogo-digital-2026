@@ -23,16 +23,11 @@ function clampPage(page) {
 }
 
 function normalizePageForView(page) {
-  page = clampPage(page);
-  if (page === 1) return 1;
-  return page % 2 === 0 ? page : page - 1;
+  return clampPage(page);
 }
 
 function getDisplayedPages(page) {
-  if (page === 1) return [1];
-  const left = normalizePageForView(page);
-  const right = left + 1 <= totalPages ? left + 1 : null;
-  return [left, right].filter(Boolean);
+  return [normalizePageForView(page)];
 }
 
 function getPageLabel(pages) {
@@ -112,13 +107,11 @@ function renderViewer() {
 }
 
 function getNextTargetPage() {
-  if (currentPage === 1) return 2;
-  return clampPage(currentPage + 2);
+  return clampPage(currentPage + 1);
 }
 
 function getPrevTargetPage() {
-  if (currentPage <= 2) return 1;
-  return clampPage(currentPage - 2);
+  return clampPage(currentPage - 1);
 }
 
 function buildFlipOverlay(direction, sourcePage, side) {
