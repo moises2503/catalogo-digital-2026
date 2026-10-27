@@ -64,9 +64,6 @@
           <h2>Explora las 52 páginas</h2>
           <p class="helper-text">Vista doble en todas las pantallas. Haz clic a los lados para cambiar de página.</p>
         </div>
-        <div class="viewer-actions">
-          <button class="btn-small secondary" id="fullscreenBtn" type="button">Pantalla completa</button>
-        </div>
       </div>
 
       <div class="controls-panel" aria-label="Controles del visor">
@@ -85,6 +82,7 @@
       </div>
 
       <div class="magazine-shell">
+        <button class="btn-small secondary fullscreen-toggle" id="fullscreenBtn" type="button" aria-expanded="false">Pantalla completa</button>
         <div class="magazine-view" id="viewer" tabindex="0" aria-label="Visor del catálogo">
           <button class="click-zone click-left" id="clickPrev" aria-label="Regresar página"></button>
           <div class="spread" id="spread"></div>

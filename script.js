@@ -12,6 +12,7 @@ const clickPrev = document.getElementById('clickPrev');
 const clickNext = document.getElementById('clickNext');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const quickLinks = Array.from(document.querySelectorAll('.quick-link'));
+const magazineShell = document.querySelector('.magazine-shell');
 const flipDuration = 400;
 
 let currentPage = 1;
@@ -50,6 +51,13 @@ function createPageCard(pageNum, positionClass, isSingle) {
   img.src = pageImages[pageNum - 1];
   img.alt = `Página ${pageNum} del catálogo`;
   img.loading = pageNum <= 3 ? 'eager' : 'lazy';
+  const setPageAspectRatio = () => {
+    if (img.naturalWidth && img.naturalHeight) {
+      article.style.setProperty('--page-aspect-ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
+    }
+  };
+  img.addEventListener('load', setPageAspectRatio, { once: true });
+  if (img.complete) setPageAspectRatio();
 
   if (pageNum === 1) {
     const contact = document.createElement('a');
@@ -84,6 +92,7 @@ function renderViewer() {
   currentPage = normalizePageForView(currentPage);
   const pages = getDisplayedPages(currentPage);
   spreadEl.innerHTML = '';
+  spreadEl.classList.toggle('single-page', pages.length === 1);
 
   if (pages.length === 1) {
     spreadEl.appendChild(createPageCard(pages[0], 'single', true));
@@ -230,22 +239,47 @@ quickLinks.forEach(btn => {
   });
 });
 
+function isCatalogFullscreen() {
+  return document.fullscreenElement === magazineShell || magazineShell.classList.contains('is-fullscreen');
+}
+
+function updateFullscreenButton() {
+  const isFullscreen = isCatalogFullscreen();
+  fullscreenBtn.textContent = isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa';
+  fullscreenBtn.setAttribute('aria-expanded', String(isFullscreen));
+  document.body.classList.toggle('catalog-fullscreen-active', isFullscreen);
+}
+
 fullscreenBtn.addEventListener('click', async () => {
-  try {
-    if (!document.fullscreenElement) {
-      await document.querySelector('.magazine-shell').requestFullscreen();
-      fullscreenBtn.textContent = 'Salir de pantalla completa';
+  if (isCatalogFullscreen()) {
+    if (document.fullscreenElement === magazineShell) {
+      try {
+        await document.exitFullscreen();
+      } catch (error) {
+        console.warn('No se pudo salir de pantalla completa', error);
+        magazineShell.classList.remove('is-fullscreen');
+      }
     } else {
-      await document.exitFullscreen();
-      fullscreenBtn.textContent = 'Pantalla completa';
+      magazineShell.classList.remove('is-fullscreen');
     }
-  } catch (error) {
-    console.warn('No se pudo activar pantalla completa', error);
+    updateFullscreenButton();
+    return;
   }
+
+  if (typeof magazineShell.requestFullscreen === 'function') {
+    try {
+      await magazineShell.requestFullscreen();
+      updateFullscreenButton();
+      return;
+    } catch (error) {
+      console.warn('No se pudo activar pantalla completa nativa; se usará la vista ampliada', error);
+    }
+  }
+
+  magazineShell.classList.add('is-fullscreen');
+  updateFullscreenButton();
 });
 
-document.addEventListener('fullscreenchange', () => {
-  fullscreenBtn.textContent = document.fullscreenElement ? 'Salir de pantalla completa' : 'Pantalla completa';
-});
+document.addEventListener('fullscreenchange', updateFullscreenButton);
 
 renderViewer();
